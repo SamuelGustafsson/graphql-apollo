@@ -1,25 +1,33 @@
-import { Document, Schema, model } from "mongoose";
+import { Document, Schema, model, Model } from "mongoose";
 const passportLocalMongoose = require("passport-local-mongoose");
 
-export interface IUser extends Document {
-	email: string;
-	admin: boolean;
-	password: string;
-}
-
-const schema = new Schema({
-	email: {
-		type: String,
-		required: true,
-	},
-	admin: { type: Boolean, default: false },
-	password: {
-		type: String,
-		required: true,
-	},
+const userSchema = new Schema({
+  email: {
+    type: String,
+    required: true
+  },
+  admin: { type: Boolean, default: false },
+  password: {
+    type: String,
+    required: true
+  }
 });
 
-schema.plugin(passportLocalMongoose);
+userSchema.statics.static1 = function() {
+  return "";
+};
+
+export interface IUser extends Document {
+  readonly email: string;
+  readonly admin: boolean;
+  readonly password: string;
+}
+
+export interface IUserModel extends Model<IUser> {
+  addUser: () => string;
+}
 
 // Ge modellen till mongoose
-export const User = model<IUser>("User", schema);
+export const UserModel = model<IUser, IUserModel>("User", userSchema);
+
+// userSchema.plugin(passportLocalMongoose);
