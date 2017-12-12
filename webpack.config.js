@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 
 module.exports = {
-	entry: "./client/index.js",
+	entry: "./dist/index.js",
 	output: {
 		path: "/",
 		filename: "bundle.js",
