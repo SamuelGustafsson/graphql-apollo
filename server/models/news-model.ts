@@ -1,4 +1,3 @@
-import * as mongoose from "mongoose";
 import { Schema, model } from "mongoose";
 
 export interface IComment {
