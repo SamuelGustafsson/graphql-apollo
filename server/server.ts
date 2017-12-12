@@ -1,9 +1,9 @@
 const express = require("express");
-// const models = require("./models");
+const models = require("./models");
 const expressGraphQL = require("express-graphql");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-// const schema = require("./schema/schema");
+const schema = require("./schema/schema");
 
 export const app = express();
 
@@ -22,13 +22,13 @@ mongoose.connection.once("open", () =>
 // .on("error", error => console.log("Error connecting to MongoLab:", error));
 
 app.use(bodyParser.json());
-// app.use(
-// 	"/graphql",
-// 	expressGraphQL({
-// 		schema,
-// 		graphiql: true,
-// 	}),
-// );
+app.use(
+	"/graphql",
+	expressGraphQL({
+		schema,
+		graphiql: true,
+	}),
+);
 
 const webpackMiddleware = require("webpack-dev-middleware");
 const webpack = require("webpack");
