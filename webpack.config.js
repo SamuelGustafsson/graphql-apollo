@@ -1,13 +1,14 @@
+const path = require("path");
 const webpack = require("webpack");
 
 module.exports = {
-	entry: "./dist/index.js",
+	entry: path.resolve(__dirname, "dist/index.js"),
 	output: {
-		path: "/",
 		filename: "bundle.js",
+		path: path.resolve(__dirname, "dist"),
+		publicPath: "/",
 	},
 	resolve: {
-		// changed from extensions: [".js", ".jsx"]
 		extensions: [".ts", ".tsx", ".js", ".jsx"],
 	},
 	module: {
