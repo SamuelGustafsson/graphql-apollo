@@ -4,8 +4,7 @@
 	"description": "Starter point for a graphQL course",
 	"main": "index.js",
 	"scripts": {
-		"dev":
-			"concurrently \"tsc \" \"nodemon ./dist/index.js --ignore ./dist/client\""
+		"dev": "concurrently \"tsc\" \"nodemon ./dist/index.js\""
 	},
 	"author": "",
 	"license": "ISC",
@@ -39,9 +38,10 @@
 		"@types/node": "^8.0.57",
 		"@types/react": "^16.0.28",
 		"@types/react-dom": "^16.0.3",
-		"awesome-typescript-loader": "^3.4.1",
-		"clean-webpack-plugin": "^0.1.17",
 		"concurrently": "^3.5.1",
-		"source-map-loader": "^0.2.3"
+		"cross-env": "^5.1.1",
+		"increase-memory-limit": "^1.0.6",
+		"source-map-loader": "^0.2.3",
+		"ts-loader": "^3.2.0"
 	}
 }

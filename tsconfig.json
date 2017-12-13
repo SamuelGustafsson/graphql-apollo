@@ -1,9 +1,5 @@
 {
 	"compileOnSave": true,
-	"awesomeTypescriptLoaderOptions": {
-		"useWebpackText": true,
-		"useTranspileModule": true
-	},
 	"compilerOptions": {
 		/* Basic Options */
 		"target":
