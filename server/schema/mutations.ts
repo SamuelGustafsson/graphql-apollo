@@ -4,9 +4,10 @@ import {
 	GraphQLID,
 	GraphQLBoolean,
 	GraphQLNonNull,
+	GraphQLList,
 } from "graphql";
-import { UserType } from "./user_type";
-import { User } from "../models/index";
+import { UserType, NewsType, TagType } from "./types/index";
+import { User, News } from "../models/index";
 
 const Mutation = new GraphQLObjectType({
 	name: "Mutation",
@@ -19,7 +20,6 @@ const Mutation = new GraphQLObjectType({
 				admin: { type: GraphQLBoolean },
 			},
 			resolve(parentValue, { email, password, admin }) {
-				console.log("I Mutationen");
 				return new User({ email, password, admin }).save();
 			},
 		},
@@ -40,6 +40,25 @@ const Mutation = new GraphQLObjectType({
 			},
 			resolve(parentValue, { id, email, password, admin }) {
 				return User.findByIdAndUpdate(id, { email, password, admin });
+			},
+		},
+		addNews: {
+			type: NewsType,
+			args: {
+				userID: { type: GraphQLID},
+				title: { type: GraphQLString },
+				image: { type: GraphQLString },
+				tags: { type: new GraphQLList(GraphQLString) },
+				content: { type: GraphQLString },
+				author: { type: GraphQLString },
+			},
+			resolve(parentValue, args) {
+				console.log("ParentValue", parentValue);
+				console.log("Args", args);
+					User.findById(id;
+				
+				return "";
+				// return new News({ title, image, tags, content, authorId }).save();
 			},
 		},
 	},

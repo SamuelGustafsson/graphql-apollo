@@ -5,9 +5,8 @@ import {
 	GraphQLID,
 	GraphQLNonNull,
 } from "graphql";
-import { UserType } from "./user_type";
-
-const User = mongoose.model("User");
+import { UserType, NewsType } from "./types/index";
+import { User, News } from "../models/index";
 
 const RootQuery = new GraphQLObjectType({
 	name: "RootQueryType",
@@ -23,6 +22,12 @@ const RootQuery = new GraphQLObjectType({
 			args: { id: { type: new GraphQLNonNull(GraphQLID) } },
 			resolve(parentValue, { id }) {
 				return User.findById(id);
+			},
+		},
+		newsAll: {
+			type: new GraphQLList(NewsType),
+			resolve() {
+				return News.find({});
 			},
 		},
 	}),
