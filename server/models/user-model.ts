@@ -1,7 +1,15 @@
 import { Document, Schema, model, Model } from "mongoose";
+import { IComment, commentSchema } from "./comment-model";
 // const passportLocalMongoose = require("passport-local-mongoose");
 
-const userSchema = new Schema({
+export interface IUser extends Document {
+	readonly email: string;
+	readonly admin: boolean;
+	readonly password: string;
+	readonly comments?: ReadonlyArray<IComment>;
+}
+
+export const userSchema = new Schema({
 	email: {
 		type: String,
 		required: true,
@@ -11,14 +19,9 @@ const userSchema = new Schema({
 		type: String,
 		required: true,
 	},
+	comments: [commentSchema],
 });
 
-export interface IUser extends Document {
-	readonly email: string;
-	readonly admin: boolean;
-	readonly password: string;
-}
-
-export const UserModel = model<IUser>("User", userSchema);
+export const User = model<IUser>("User", userSchema);
 
 // userSchema.plugin(passportLocalMongoose);
