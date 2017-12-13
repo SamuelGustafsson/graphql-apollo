@@ -6,9 +6,7 @@ import {
 	GraphQLNonNull,
 } from "graphql";
 import { UserType } from "./user_type";
-import * as mongoose from "mongoose";
-import { UserModel } from "../models/index";
-const User = mongoose.model("User");
+import { User } from "../models/index";
 
 const Mutation = new GraphQLObjectType({
 	name: "Mutation",
