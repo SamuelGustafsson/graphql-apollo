@@ -2,11 +2,9 @@ const path = require("path");
 const webpack = require("webpack");
 
 module.exports = {
-	entry: path.resolve(__dirname, "dist/index.js"),
+	entry: path.resolve(__dirname, "dist/client/index"),
 	output: {
 		filename: "bundle.js",
-		path: path.resolve(__dirname, "dist"),
-		publicPath: "/",
 	},
 	resolve: {
 		extensions: [".ts", ".tsx", ".js", ".jsx"],
