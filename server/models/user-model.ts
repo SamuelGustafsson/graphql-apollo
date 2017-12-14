@@ -1,4 +1,5 @@
 import { Document, Schema, model, Model, Promise } from "mongoose";
+import * as mongoose from "mongoose";
 import {
 	IComment,
 	commentSchema,
@@ -12,10 +13,15 @@ export interface IUser extends Document {
 	readonly email: string;
 	readonly admin: boolean;
 	readonly password: string;
-	readonly news?: ReadonlyArray<INews>;
+	readonly news?: ReadonlyArray<string>;
+}
+
+interface IUserModel extends IUser, Document {
+	// addNews: (userId: string, news: INews) => {};
 }
 
 export const userSchema = new Schema({
+	_id: Schema.Types.ObjectId,
 	email: {
 		type: String,
 		required: true,
@@ -25,32 +31,27 @@ export const userSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	news: {
-		type: [newsSchema],
-	},
+	news: [{ type: Schema.Types.ObjectId, ref: "News" }],
 });
-// SongSchema.statics.addLyric = function(id, content) {
-// 	const Lyric = mongoose.model('lyric');
 
-// 	return this.findById(id)
-// 	  .then(song => {
-// 		const lyric = new Lyric({ content, song })
-// 		song.lyrics.push(lyric)
-// 		return Promise.all([lyric.save(), song.save()])
-// 		  .then(([lyric, song]) => song);
-// 	  });
-//   }
+// userSchema.statics.addNews = function(userId: string, news: INews) {
+// 	const News = mongoose.model("News");
 
-userSchema.statics.addNews = function(userId: string, news: INews) {
-	return this.findById(userId).then(user => {
-		const tempNews = new NewsModel(news);
-		user.news.push(tempNews);
-		return Promise.all([tempNews.save(), user.save()]).then(
-			([tempNews, user]: Array<{}>) => user,
-		);
-	});
-};
+// 	return this.
+// };
 
-export const User = model<IUser>("User", userSchema);
+export const User = model<IUserModel>("User", userSchema);
 
 // userSchema.plugin(passportLocalMongoose);
+
+// SongSchema.statics.addLyric = function(id, content) {
+// 	const Lyric = mongoose.model("lyric");
+
+// 	return this.findById(id).then(song => {
+// 		const lyric = new Lyric({ content, song });
+// 		song.lyrics.push(lyric);
+// 		return Promise.all([lyric.save(), song.save()]).then(
+// 			([lyric, song]) => song,
+// 		);
+// 	});
+// };
