@@ -128,7 +128,7 @@ mutation {
 
 ## Authors
 
-* **Samuel Gustafsson** - _Initial work_ -
+* **Samuel Gustafsson**
 
 ## License
 
