@@ -8,6 +8,7 @@ import {
 } from "graphql";
 import { UserType, NewsType, TagType } from "./types/index";
 import { User, News } from "../models/index";
+import * as mongoose from "mongoose";
 
 const Mutation = new GraphQLObjectType({
 	name: "Mutation",
@@ -45,20 +46,26 @@ const Mutation = new GraphQLObjectType({
 		addNews: {
 			type: NewsType,
 			args: {
-				userID: { type: GraphQLID},
+				userId: { type: GraphQLID },
 				title: { type: GraphQLString },
 				image: { type: GraphQLString },
-				tags: { type: new GraphQLList(GraphQLString) },
+				// tags: { type: new GraphQLList(GraphQLString) },
 				content: { type: GraphQLString },
-				author: { type: GraphQLString },
 			},
-			resolve(parentValue, args) {
-				console.log("ParentValue", parentValue);
-				console.log("Args", args);
-					User.findById(id;
-				
-				return "";
-				// return new News({ title, image, tags, content, authorId }).save();
+			async resolve(parentValue, { userId, title, content, image }) {
+				const userEmail = await User.findById(userId).then(
+					user => user && user.email,
+				);
+
+				if (!userEmail) throw new Error("Cant find user.");
+
+				return new News({
+					_id: new mongoose.Types.ObjectId(),
+					title,
+					content,
+					image,
+					author: userEmail,
+				}).save();
 			},
 		},
 	},

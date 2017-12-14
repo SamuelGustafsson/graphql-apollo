@@ -4,6 +4,7 @@ import {
 	GraphQLID,
 	GraphQLBoolean,
 	GraphQLList,
+	GraphQLNonNull,
 } from "graphql";
 const GraphQLDate = require("graphql-date");
 import { UserType } from "./index";
@@ -11,7 +12,7 @@ import { UserType } from "./index";
 export const TagType = new GraphQLObjectType({
 	name: "TagType",
 	fields: () => ({
-		// id: { type: GraphQLID },
+		id: { type: GraphQLID },
 		text: { type: GraphQLString },
 	}),
 });
@@ -19,11 +20,12 @@ export const TagType = new GraphQLObjectType({
 export const NewsType = new GraphQLObjectType({
 	name: "NewsType",
 	fields: () => ({
-		id: { type: GraphQLID },
+		id: { type: new GraphQLNonNull(GraphQLID) },
+		title: { type: new GraphQLNonNull(GraphQLString) },
+		content: { type: new GraphQLNonNull(GraphQLString) },
 		image: { type: GraphQLString },
 		tags: { type: new GraphQLList(TagType) },
-		content: { type: GraphQLString },
-		author: { type: UserType },
-		created: { type: GraphQLDate },
+		author: { type: new GraphQLNonNull(GraphQLString) },
+		created: { type: new GraphQLNonNull(GraphQLString) },
 	}),
 });
