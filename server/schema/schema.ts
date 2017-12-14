@@ -1,11 +1,9 @@
-const _ = require('lodash');
-const graphql = require('graphql');
-const { GraphQLSchema } = graphql;
+import { GraphQLSchema } from "graphql";
 
-const RootQueryType = require('./root_query_type');
-const mutations = require('./mutations');
+import RootQueryType from "./root_query_type";
+import Mutations from "./mutations";
 
 module.exports = new GraphQLSchema({
-  query: RootQueryType,
-  mutation: mutations
+	query: RootQueryType,
+	mutation: Mutations,
 });

@@ -1,18 +1,17 @@
+const path = require("path");
 const webpack = require("webpack");
 
 module.exports = {
-	entry: "./client/index.js",
+	entry: path.resolve(__dirname, "client/index"),
 	output: {
-		path: "/",
 		filename: "bundle.js",
 	},
 	resolve: {
-		// changed from extensions: [".js", ".jsx"]
 		extensions: [".ts", ".tsx", ".js", ".jsx"],
 	},
 	module: {
 		rules: [
-			{ test: /\.(t|j)sx?$/, use: { loader: "awesome-typescript-loader" } },
+			{ test: /\.tsx?$/, loader: "ts-loader" },
 			{ enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
 		],
 	},
