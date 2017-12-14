@@ -4,7 +4,7 @@
 	"description": "Starter point for a graphQL course",
 	"main": "index.js",
 	"scripts": {
-		"dev": "concurrently \"rm -rf ./dist\" \"tsc\" \"nodemon ./dist/index.js\""
+		"dev": "nodemon --exec ts-node index.ts"
 	},
 	"author": "",
 	"license": "ISC",
@@ -43,6 +43,7 @@
 		"graphql-date": "^1.0.3",
 		"increase-memory-limit": "^1.0.6",
 		"source-map-loader": "^0.2.3",
-		"ts-loader": "^3.2.0"
+		"ts-loader": "^3.2.0",
+		"ts-node": "^4.0.1"
 	}
 }
