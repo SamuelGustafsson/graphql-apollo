@@ -38,7 +38,11 @@ Json server endpoints
   http://localhost:3000/comments
 ```
 
+## GraphQL
+
 Go to www.localhost:4000/graphql and add this to display user.
+
+### User querys.
 
 Find user by id.
 
@@ -52,6 +56,8 @@ Find user by id.
   }
 }
 ```
+
+### User mutations.
 
 Add user example.
 
@@ -73,6 +79,38 @@ mutation {
     id
     email
     password
+  }
+}
+```
+
+### News querys
+
+Display all news.
+
+```
+{
+  newsAll{
+    id
+    title
+    image
+    content
+    author
+  }
+}
+```
+
+### News mutations
+
+Add news.
+
+```
+mutation {
+  addNews(userId: "5a2fdd24bc3f4defdfed8c03", title: "This is the first news!", content:"This is the first content") {
+    id
+    title
+    image
+    content
+    author
   }
 }
 ```
