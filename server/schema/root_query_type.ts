@@ -24,16 +24,6 @@ const RootQuery = new GraphQLObjectType({
 				return User.findById(id);
 			},
 		},
-		// getUsersNews: {
-		// 	type: UserType,
-		// 	args: {
-		// 		userId: { type: new GraphQLNonNull(GraphQLID) },
-
-		// 	},
-		// 	resolve(parentValue, {userId}) {
-		// 		return User.findById(id).
-		// 	}
-		// },
 		newsAll: {
 			type: new GraphQLList(NewsType),
 			resolve() {
