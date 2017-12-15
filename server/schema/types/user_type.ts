@@ -18,8 +18,8 @@ export const UserType = new GraphQLObjectType({
     userImage: { type: GraphQLString },
     news: {
       type: new GraphQLList(NewsType),
-      async resolve(parentValue, args) {
-        return await News.find({ author: parentValue.id });
+      async resolve(_parentValue) {
+        return await News.find({ author: _parentValue.id });
       }
     }
   })

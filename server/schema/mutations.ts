@@ -18,14 +18,14 @@ const Mutation = new GraphQLObjectType({
         password: { type: GraphQLString },
         admin: { type: GraphQLBoolean }
       },
-      resolve(parentValue, { email, password, admin }) {
+      resolve(_parentValue, { email, password, admin }) {
         return new User({ email, password, admin }).save();
       }
     },
     deleteUser: {
       type: UserType,
       args: { id: { type: GraphQLID } },
-      resolve(parentValue, { id }) {
+      resolve(_parentValue, { id }) {
         return User.remove({ _id: id });
       }
     },
@@ -37,7 +37,7 @@ const Mutation = new GraphQLObjectType({
         password: { type: GraphQLString },
         admin: { type: GraphQLBoolean }
       },
-      resolve(parentValue, { id, email, password, admin }) {
+      resolve(_parentValue, { id, email, password, admin }) {
         return User.findByIdAndUpdate(id, { email, password, admin });
       }
     },
@@ -49,7 +49,7 @@ const Mutation = new GraphQLObjectType({
         image: { type: GraphQLString },
         content: { type: GraphQLString }
       },
-      async resolve(parentValue, { userId, title, content, image }) {
+      async resolve(_parentValue, { userId, title, content, image }) {
         return new News({
           _id: new mongoose.Types.ObjectId(),
           title,
