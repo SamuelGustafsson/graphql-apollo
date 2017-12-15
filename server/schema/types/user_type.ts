@@ -1,26 +1,27 @@
 import {
-	GraphQLObjectType,
-	GraphQLString,
-	GraphQLID,
-	GraphQLBoolean,
-	GraphQLList,
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLID,
+  GraphQLBoolean,
+  GraphQLList,
+  GraphQLNonNull
 } from "graphql";
 import { NewsType } from "./index";
 import { News } from "../../models/index";
 
 export const UserType = new GraphQLObjectType({
-	name: "UserType",
-	fields: () => ({
-		id: { type: GraphQLID },
-		email: { type: GraphQLString },
-		admin: { type: GraphQLBoolean },
-		password: { type: GraphQLString },
-		news: {
-			type: new GraphQLList(NewsType),
-			async resolve(parentValue, args) {
-				console.log("EMAIL");
-				return await News.find({ author: parentValue.email });
-			},
-		},
-	}),
+  name: "UserType",
+  fields: () => ({
+    id: { type: new GraphQLNonNull(GraphQLString) },
+    email: { type: new GraphQLNonNull(GraphQLString) },
+    admin: { type: GraphQLBoolean },
+    password: { type: new GraphQLNonNull(GraphQLString) },
+    userImage: { type: GraphQLString },
+    news: {
+      type: new GraphQLList(NewsType),
+      async resolve(parentValue, args) {
+        return await News.find({ author: parentValue.id });
+      }
+    }
+  })
 });
