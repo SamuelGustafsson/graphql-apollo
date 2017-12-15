@@ -2,13 +2,11 @@ import {
   GraphQLObjectType,
   GraphQLString,
   GraphQLID,
-  GraphQLBoolean,
   GraphQLList,
   GraphQLNonNull
 } from "graphql";
-const GraphQLDate = require("graphql-date");
 import { UserType } from "./index";
-import { User, News } from "../../models/index";
+import { User } from "../../models/index";
 
 export const TagType = new GraphQLObjectType({
   name: "TagType",
@@ -18,7 +16,7 @@ export const TagType = new GraphQLObjectType({
   })
 });
 
-export const NewsType = new GraphQLObjectType({
+export const NewsType: GraphQLObjectType = new GraphQLObjectType({
   name: "NewsType",
   fields: () => ({
     id: { type: new GraphQLNonNull(GraphQLID) },

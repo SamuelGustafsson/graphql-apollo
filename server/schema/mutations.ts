@@ -2,11 +2,9 @@ import {
   GraphQLObjectType,
   GraphQLString,
   GraphQLID,
-  GraphQLBoolean,
-  GraphQLNonNull,
-  GraphQLList
+  GraphQLBoolean
 } from "graphql";
-import { UserType, NewsType, TagType } from "./types/index";
+import { UserType, NewsType } from "./types/index";
 import { User, News } from "../models/index";
 import * as mongoose from "mongoose";
 

@@ -1,12 +1,4 @@
-import { Document, Schema, model, Model, Promise } from "mongoose";
-import * as mongoose from "mongoose";
-import {
-  INews,
-  newsSchema,
-  News as NewsModel
-} from "./index";
-// const passportLocalMongoose = require("passport-local-mongoose");
-
+import { Document, Schema, model } from "mongoose";
 export interface IUser extends Document {
   readonly email: string;
   readonly admin: boolean;
