@@ -115,6 +115,31 @@ mutation {
 }
 ```
 
+### Comment mutations
+
+Add comment.
+
+```
+mutation {
+addComment(text: "Jag ær en kommentar", userId:"5a3386f92ca76e42506ce59e", newsId:"5a338dd97ed0b723f09b2534"){
+  text
+  author {
+    id
+    email
+  }
+  news {
+    id
+    title
+    content
+    author {
+      id
+      email
+    }
+  }
+}
+}
+```
+
 ## Built With
 
 * [GraphQL](http://graphql.org/) - A query language for API's.
@@ -134,3 +159,5 @@ mutation {
 
 This project is licensed under the MIT License - see the
 [LICENSE.md](LICENSE.md) file for details
+
+Add comment to user and news.
