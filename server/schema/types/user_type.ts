@@ -5,8 +5,8 @@ import {
   GraphQLList,
   GraphQLNonNull
 } from "graphql";
-import { NewsType } from "./index";
-import { News } from "../../models/index";
+import { NewsType, CommentType } from "./index";
+import { News, Comment } from "../../models/index";
 
 export const UserType = new GraphQLObjectType({
   name: "UserType",
@@ -20,6 +20,12 @@ export const UserType = new GraphQLObjectType({
       type: new GraphQLList(NewsType),
       async resolve(_parentValue) {
         return await News.find({ author: _parentValue.id });
+      }
+    },
+    comments: {
+      type: new GraphQLList(CommentType),
+      async resolve(_parentValue) {
+        return await Comment.find({ authorId: _parentValue.id });
       }
     }
   })
