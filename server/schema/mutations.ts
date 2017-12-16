@@ -4,8 +4,9 @@ import {
   GraphQLID,
   GraphQLBoolean
 } from "graphql";
-import { UserType, NewsType } from "./types/index";
-import { User, News } from "../models/index";
+import { UserType, NewsType, CommentType } from "./types/index";
+import { User, News, Comment } from "../models/index";
+
 import * as mongoose from "mongoose";
 
 const Mutation = new GraphQLObjectType({
@@ -56,6 +57,22 @@ const Mutation = new GraphQLObjectType({
           content,
           image,
           author: userId
+        }).save();
+      }
+    },
+    addComment: {
+      type: CommentType,
+      args: {
+        text: { type: GraphQLString },
+        userId: { type: GraphQLString },
+        newsId: { type: GraphQLString }
+      },
+      resolve(_parentValue, { text, userId, newsId }) {
+        return new Comment({
+          _id: new mongoose.Types.ObjectId(),
+          text,
+          authorId: userId,
+          newsId
         }).save();
       }
     }
