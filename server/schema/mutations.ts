@@ -2,12 +2,11 @@ import {
   GraphQLObjectType,
   GraphQLString,
   GraphQLID,
-  GraphQLBoolean,
-  GraphQLNonNull,
-  GraphQLList
+  GraphQLBoolean
 } from "graphql";
-import { UserType, NewsType, TagType } from "./types/index";
-import { User, News } from "../models/index";
+import { UserType, NewsType, CommentType } from "./types/index";
+import { User, News, Comment } from "../models/index";
+
 import * as mongoose from "mongoose";
 
 const Mutation = new GraphQLObjectType({
@@ -20,14 +19,14 @@ const Mutation = new GraphQLObjectType({
         password: { type: GraphQLString },
         admin: { type: GraphQLBoolean }
       },
-      resolve(parentValue, { email, password, admin }) {
+      resolve(_parentValue, { email, password, admin }) {
         return new User({ email, password, admin }).save();
       }
     },
     deleteUser: {
       type: UserType,
       args: { id: { type: GraphQLID } },
-      resolve(parentValue, { id }) {
+      resolve(_parentValue, { id }) {
         return User.remove({ _id: id });
       }
     },
@@ -39,7 +38,7 @@ const Mutation = new GraphQLObjectType({
         password: { type: GraphQLString },
         admin: { type: GraphQLBoolean }
       },
-      resolve(parentValue, { id, email, password, admin }) {
+      resolve(_parentValue, { id, email, password, admin }) {
         return User.findByIdAndUpdate(id, { email, password, admin });
       }
     },
@@ -51,13 +50,29 @@ const Mutation = new GraphQLObjectType({
         image: { type: GraphQLString },
         content: { type: GraphQLString }
       },
-      async resolve(parentValue, { userId, title, content, image }) {
+      async resolve(_parentValue, { userId, title, content, image }) {
         return new News({
           _id: new mongoose.Types.ObjectId(),
           title,
           content,
           image,
           author: userId
+        }).save();
+      }
+    },
+    addComment: {
+      type: CommentType,
+      args: {
+        text: { type: GraphQLString },
+        userId: { type: GraphQLString },
+        newsId: { type: GraphQLString }
+      },
+      resolve(_parentValue, { text, userId, newsId }) {
+        return new Comment({
+          _id: new mongoose.Types.ObjectId(),
+          text,
+          authorId: userId,
+          newsId
         }).save();
       }
     }

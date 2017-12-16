@@ -2,13 +2,11 @@ import {
   GraphQLObjectType,
   GraphQLString,
   GraphQLID,
-  GraphQLBoolean,
   GraphQLList,
   GraphQLNonNull
 } from "graphql";
-const GraphQLDate = require("graphql-date");
-import { UserType } from "./index";
-import { User, News } from "../../models/index";
+import { UserType, CommentType } from "./index";
+import { User, Comment } from "../../models/index";
 
 export const TagType = new GraphQLObjectType({
   name: "TagType",
@@ -18,7 +16,7 @@ export const TagType = new GraphQLObjectType({
   })
 });
 
-export const NewsType = new GraphQLObjectType({
+export const NewsType: GraphQLObjectType = new GraphQLObjectType({
   name: "NewsType",
   fields: () => ({
     id: { type: new GraphQLNonNull(GraphQLID) },
@@ -28,8 +26,14 @@ export const NewsType = new GraphQLObjectType({
     tags: { type: new GraphQLList(TagType) },
     author: {
       type: UserType,
-      async resolve(parentValue) {
-        return await User.findById(parentValue.author);
+      async resolve(_parentValue) {
+        return await User.findById(_parentValue.author);
+      }
+    },
+    comments: {
+      type: new GraphQLList(CommentType),
+      async resolve(_parentValue) {
+        return await Comment.find({});
       }
     },
     created: { type: new GraphQLNonNull(GraphQLString) }

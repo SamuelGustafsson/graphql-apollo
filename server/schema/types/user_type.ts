@@ -1,13 +1,12 @@
 import {
   GraphQLObjectType,
   GraphQLString,
-  GraphQLID,
   GraphQLBoolean,
   GraphQLList,
   GraphQLNonNull
 } from "graphql";
-import { NewsType } from "./index";
-import { News } from "../../models/index";
+import { NewsType, CommentType } from "./index";
+import { News, Comment } from "../../models/index";
 
 export const UserType = new GraphQLObjectType({
   name: "UserType",
@@ -19,8 +18,14 @@ export const UserType = new GraphQLObjectType({
     userImage: { type: GraphQLString },
     news: {
       type: new GraphQLList(NewsType),
-      async resolve(parentValue, args) {
-        return await News.find({ author: parentValue.id });
+      async resolve(_parentValue) {
+        return await News.find({ author: _parentValue.id });
+      }
+    },
+    comments: {
+      type: new GraphQLList(CommentType),
+      async resolve(_parentValue) {
+        return await Comment.find({ authorId: _parentValue.id });
       }
     }
   })

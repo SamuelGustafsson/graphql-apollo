@@ -1,4 +1,3 @@
-import * as mongoose from "mongoose";
 import {
   GraphQLObjectType,
   GraphQLList,
@@ -20,7 +19,7 @@ const RootQuery = new GraphQLObjectType({
     user: {
       type: UserType,
       args: { id: { type: new GraphQLNonNull(GraphQLID) } },
-      resolve(parentValue, { id }) {
+      resolve(_parentValue, { id }) {
         return User.findById(id);
       }
     },
@@ -33,7 +32,7 @@ const RootQuery = new GraphQLObjectType({
     news: {
       type: NewsType,
       args: { id: { type: new GraphQLNonNull(GraphQLID) } },
-      resolve(parentValue, { id }) {
+      resolve(_parentValue, { id }) {
         return News.findById(id);
       }
     }
