@@ -99,6 +99,20 @@ Display all news.
 }
 ```
 
+Display news tags
+
+```
+{
+  news(id: "5a338dd97ed0b723f09b2534") {
+    title
+    tags {
+      id
+      text
+    }
+  }
+}
+```
+
 ### News mutations
 
 Add news.
@@ -140,6 +154,62 @@ addComment(text: "Jag ær en kommentar", userId:"5a3386f92ca76e42506ce59e", news
 }
 ```
 
+### Tag querys
+
+Get all tags
+
+```
+{
+  tags {
+    id
+    text
+    author {
+      email
+    }
+    news {
+      id
+      author {
+        email
+      }
+    }
+  }
+}
+```
+
+### Tag mutations
+
+Add comment.
+
+```
+mutation {
+  addTag(text: "Tag 1", newsId: "5a338dd97ed0b723f09b2534", authorId: "5a3386f92ca76e42506ce59e") {
+    id
+    text
+    news {
+      id
+      author {
+        email
+      }
+    }
+    author {
+      id
+      email
+    }
+  }
+}
+```
+
+Delete Tag.
+
+```
+mutation {
+  deleteTag(id: "5a3650e35979064ebc8e3b02") {
+    id
+    text
+  }
+}
+```
+
 ## Built With
 
 * [GraphQL](http://graphql.org/) - A query language for API's.
@@ -159,5 +229,3 @@ addComment(text: "Jag ær en kommentar", userId:"5a3386f92ca76e42506ce59e", news
 
 This project is licensed under the MIT License - see the
 [LICENSE.md](LICENSE.md) file for details
-
-Add comment to user and news.

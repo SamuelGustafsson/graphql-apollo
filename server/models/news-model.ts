@@ -6,6 +6,7 @@ export interface INews {
   readonly image?: string;
   readonly author: string;
   readonly comments?: ReadonlyArray<string>;
+  readonly tags?: ReadonlyArray<string>;
   readonly created: Date;
 }
 
@@ -21,6 +22,7 @@ export const newsSchema = new Schema({
   },
   author: { type: Schema.Types.ObjectId, ref: "User" },
   comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+  tags: [{ type: Schema.Types.ObjectId, ref: "Tag" }],
   created: { type: Date, default: Date.now }
 });
 
