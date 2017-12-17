@@ -91,6 +91,13 @@ const Mutation = new GraphQLObjectType({
           newsId
         }).save();
       }
+    },
+    deleteTag: {
+      type: TagType,
+      args: { id: { type: GraphQLID } },
+      resolve(_parentValue, { id }) {
+        return Tag.remove({ _id: id });
+      }
     }
   }
 });

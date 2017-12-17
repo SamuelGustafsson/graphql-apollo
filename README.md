@@ -175,6 +175,7 @@ Get all tags
   }
 }
 ```
+
 ### Tag mutations
 
 Add comment.
@@ -194,6 +195,17 @@ mutation {
       id
       email
     }
+  }
+}
+```
+
+Delete Tag.
+
+```
+mutation {
+  deleteTag(id: "5a3650e35979064ebc8e3b02") {
+    id
+    text
   }
 }
 ```
