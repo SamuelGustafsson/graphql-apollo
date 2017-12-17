@@ -4,8 +4,8 @@ import {
   GraphQLID,
   GraphQLNonNull
 } from "graphql";
-import { UserType, NewsType } from "./types/index";
-import { User, News } from "../models/index";
+import { UserType, NewsType, TagType } from "./types/index";
+import { User, News, Tag } from "../models/index";
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -30,6 +30,19 @@ const RootQuery = new GraphQLObjectType({
       }
     },
     news: {
+      type: NewsType,
+      args: { id: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(_parentValue, { id }) {
+        return News.findById(id);
+      }
+    },
+    tags: {
+      type: new GraphQLList(TagType),
+      resolve() {
+        return Tag.find({});
+      }
+    },
+    tag: {
       type: NewsType,
       args: { id: { type: new GraphQLNonNull(GraphQLID) } },
       resolve(_parentValue, { id }) {
