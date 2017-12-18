@@ -1,9 +1,17 @@
 var path = require("path");
 
 module.exports = {
-	entry: "./client/index.tsx",
+	resolve: {
+		extensions: [".ts", ".tsx", ".js"],
+	},
+	entry: "./src/client/index.tsx",
+	output: {
+		filename: "bundle.js",
+		path: path.resolve(__dirname, "dist"),
+		publicPath: "/dist/",
+	},
 	module: {
-		rules: [{ test: /\.tsx?$/, use: "ts-loader", exclude: /node_modules/ }],
+		rules: [{ test: /\.tsx?$/, loader: "ts-loader" }],
 	},
 	devServer: {
 		stats: {
@@ -14,13 +22,5 @@ module.exports = {
 			errorDetails: true,
 		},
 		overlay: true,
-	},
-	resolve: {
-		extensions: [".ts", ".tsx", ".js"],
-	},
-	output: {
-		filename: "bundle.js",
-		path: path.resolve(__dirname, "dist"),
-		publicPath: "/client/",
 	},
 };

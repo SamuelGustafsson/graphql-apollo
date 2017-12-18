@@ -4,8 +4,8 @@
 	"description": "Starter point for a graphQL course",
 	"main": "index.js",
 	"scripts": {
-		"server": "nodemon --exec ts-node index.ts",
-		"client": " webpack-dev-server",
+		"server": "nodemon --exec ts-node ./src/server/index.ts",
+		"client": "webpack-dev-server",
 		"dev": "concurrently \"yarn run client\" \"yarn run server\""
 	},
 	"author": "",

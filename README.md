@@ -63,10 +63,10 @@ Add user example.
 
 ```
   mutation {
-    addUser(email: "test@mail.com", password: "password", admin: false) {
+    addUser(email: "Frida@mail.com", password: "password", admin: false) {
       id
-      firstname
-      lastname
+      email
+      password
     }
   }
 ```
