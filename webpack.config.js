@@ -1,19 +1,26 @@
-const path = require("path");
-const webpack = require("webpack");
+var path = require("path");
 
 module.exports = {
-	entry: path.resolve(__dirname, "client/index"),
-	output: {
-		filename: "bundle.js",
+	entry: "./client/index.tsx",
+	module: {
+		rules: [{ test: /\.tsx?$/, use: "ts-loader", exclude: /node_modules/ }],
+	},
+	devServer: {
+		stats: {
+			assets: false,
+			hash: false,
+			chunks: false,
+			errors: true,
+			errorDetails: true,
+		},
+		overlay: true,
 	},
 	resolve: {
-		extensions: [".ts", ".tsx", ".js", ".jsx"],
+		extensions: [".ts", ".tsx", ".js"],
 	},
-	module: {
-		rules: [
-			{ test: /\.tsx?$/, loader: "ts-loader" },
-			{ enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
-		],
+	output: {
+		filename: "bundle.js",
+		path: path.resolve(__dirname, "dist"),
+		publicPath: "/client/",
 	},
-	devtool: "source-map",
 };
