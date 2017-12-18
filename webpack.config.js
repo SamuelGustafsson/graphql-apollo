@@ -14,6 +14,9 @@ module.exports = {
 		rules: [{ test: /\.tsx?$/, loader: "ts-loader" }],
 	},
 	devServer: {
+		proxy: {
+			"/graphql": "http://localhost:4000/graphql",
+		},
 		stats: {
 			assets: false,
 			hash: false,
