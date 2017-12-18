@@ -1,5 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { Provider as ReduxProvider } from "react-redux";
+import { store } from "./redux-store";
 import { ApolloClient } from "apollo-client";
 import { ApolloProvider } from "react-apollo";
 import { HttpLink } from "apollo-link-http";
@@ -13,7 +15,9 @@ const apolloClient = new ApolloClient({
 const Root = () => {
 	return (
 		<ApolloProvider client={apolloClient}>
-			<div>Katt</div>;
+			<ReduxProvider store={store}>
+				<div>Katt</div>;
+			</ReduxProvider>
 		</ApolloProvider>
 	);
 };
