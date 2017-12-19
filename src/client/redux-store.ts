@@ -1,11 +1,11 @@
 import * as Redux from "redux";
-import { rootReducer } from "./root-reducer";
-import { RootState } from "./root-types";
+import { rootReducer, initialState } from "./root-reducer";
+import { State as RootState } from "./root-reducer";
 
 function createStore(): Redux.Store<RootState> {
 	return Redux.createStore(
 		rootReducer,
-		{} as RootState,
+		initialState,
 		(window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
 			(window as any).__REDUX_DEVTOOLS_EXTENSION__(),
 	);

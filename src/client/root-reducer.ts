@@ -1,8 +1,14 @@
-import { RootState, Ui } from "./root-types";
-import * as Redux from "redux";
+import { reducer as dataReducer } from "./data/data-reducer";
+import * as data from "./data/data-state";
 
-const uiReducer = Redux.combineReducers<Ui>({});
+export interface State {
+	readonly data: data.State;
+}
 
-export const rootReducer = Redux.combineReducers<RootState>({
-	ui: uiReducer,
+export const initialState: State = {
+	data: data.initialState,
+};
+
+export const rootReducer = (state: State, action: any) => ({
+	data: dataReducer(state.data, action),
 });
