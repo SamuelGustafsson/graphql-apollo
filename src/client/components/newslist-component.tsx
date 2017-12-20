@@ -15,9 +15,17 @@ const query = gql`
 	}
 `;
 
+interface Props {
+	readonly data: {
+		loading: boolean;
+		error: boolean;
+		newsAll: ReadonlyArray<News>;
+	};
+}
+
 export function ContainerComponent({
 	data: { loading, error, newsAll },
-}: any): JSX.Element {
+}: Props): JSX.Element {
 	if (loading) {
 		return <div>LOADING...</div>;
 	}
@@ -40,7 +48,7 @@ type News = {
 };
 
 type Response = {
-	news: ReadonlyArray<News>;
+	newsAll: ReadonlyArray<News>;
 };
 
-export const NewsList = graphql<Response>(query)(ContainerComponent);
+export const NewsList = graphql<Response, Props>(query)(ContainerComponent);
