@@ -10,11 +10,9 @@ const query = gql`
 	}
 `;
 
-interface Props {}
-
 export function ContainerComponent({
 	data: { loading, error, users },
-}: any): React.ReactElement<Props> {
+}: any): JSX.Element {
 	if (loading) {
 		return <div>LOADING...</div>;
 	}
@@ -29,11 +27,11 @@ export function ContainerComponent({
 	return <ul>{userList}</ul>;
 }
 
-export const UserList = graphql<Response>(query)(ContainerComponent);
-
 export type User = {
 	email: string;
 };
 export type Response = {
 	users: ReadonlyArray<User>;
 };
+
+export const UserList = graphql<Response>(query)(ContainerComponent);
